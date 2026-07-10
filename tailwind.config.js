@@ -11,8 +11,31 @@ export default {
     ],
     theme: {
         extend: {
+            colors: {
+                // Ash Is Still Paper — warm neutrals with memory of fire.
+                paper: '#F5F0E8',
+                smoke: '#D6CFC4',
+                ash: '#8B8680',
+                charcoal: '#2C2C2C',
+                ember: {
+                    DEFAULT: '#C4704B',
+                    soft: '#D98B63',
+                },
+                burnt: {
+                    DEFAULT: '#1A1613',
+                    deep: '#120F0C',
+                },
+            },
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                display: ['"DM Serif Display"', 'Georgia', 'serif'],
+                sans: ['Karla', 'Figtree', ...defaultTheme.fontFamily.sans],
+                mono: ['"IBM Plex Mono"', ...defaultTheme.fontFamily.mono],
+            },
+            transitionDuration: {
+                DEFAULT: '300ms',
+            },
+            transitionTimingFunction: {
+                DEFAULT: 'cubic-bezier(0, 0, 0.2, 1)',
             },
         },
     },
