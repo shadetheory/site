@@ -25,6 +25,9 @@ export default {
                     DEFAULT: '#1A1613',
                     deep: '#120F0C',
                 },
+                // Warm terminal amber — data artifacts, log lines. Amber, not green:
+                // green fights the tungsten palette.
+                signal: '#E0A458',
             },
             fontFamily: {
                 display: ['"DM Serif Display"', 'Georgia', 'serif'],

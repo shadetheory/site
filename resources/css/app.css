@@ -3,33 +3,74 @@
 @tailwind utilities;
 
 /* ------------------------------------------------------------------
-   Ash Is Still Paper — dark inversion ("Black Mirror Lullaby")
-   Same page, under candlelight. Warmth persisting under darkness.
+   Ash Is Still Paper — warm-ash cyberpunk ("Black Mirror Lullaby")
+   The control surface of a home server at 3am. Tungsten and a
+   dying CRT, not neon. Warmth persisting under darkness.
 ------------------------------------------------------------------- */
 
 @layer utilities {
-    /* Paper-grain texture: felt more than seen. SVG fractal noise,
-       blended softly over the warm near-black ground. */
-    .paper-grain {
+    /* CRT surface: hairline scanlines over the whole viewport plus a
+       faint amber phosphor bloom near the hero. Felt more than seen. */
+    .crt {
         position: relative;
         isolation: isolate;
     }
 
-    .paper-grain::after {
+    .crt::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        pointer-events: none;
+        background: radial-gradient(
+            ellipse 80% 55% at 50% 35%,
+            rgba(224, 164, 88, 0.05),
+            transparent 70%
+        );
+    }
+
+    .crt::after {
         content: '';
         position: fixed;
         inset: 0;
         z-index: 50;
         pointer-events: none;
-        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-        background-size: 160px 160px;
-        opacity: 0.045;
-        mix-blend-mode: soft-light;
+        background: repeating-linear-gradient(
+            0deg,
+            rgba(8, 5, 3, 0.6) 0px,
+            rgba(8, 5, 3, 0.6) 1px,
+            transparent 1px,
+            transparent 3px
+        );
+        opacity: 0.12;
     }
 
-    /* Content reveals itself like ink drying. */
+    /* Signal degradation for the hero name: scanlines pass through the
+       glyphs themselves, with a warm phosphor bloom behind them.
+       Static treatment — no glitch loops. */
+    .signal-degrade {
+        background-image: linear-gradient(
+            to bottom,
+            #f5f0e8 0px,
+            #f5f0e8 2px,
+            #c9bfb0 2px,
+            #c9bfb0 3px
+        );
+        background-size: 100% 3px;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        filter: drop-shadow(0 0 22px rgba(217, 139, 99, 0.28));
+    }
+
+    /* Content arrives like a transmission resolving. */
     .ink-rise {
         animation: ink-rise 0.9s cubic-bezier(0, 0, 0.2, 1) both;
+    }
+
+    /* Background data artifacts drift almost imperceptibly. */
+    .artifact-drift {
+        animation: artifact-drift 90s ease-in-out infinite alternate;
     }
 }
 
@@ -44,8 +85,18 @@
     }
 }
 
+@keyframes artifact-drift {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-28px);
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
-    .ink-rise {
+    .ink-rise,
+    .artifact-drift {
         animation: none;
     }
 }
