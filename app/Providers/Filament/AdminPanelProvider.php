@@ -3,28 +3,16 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Dashboard;
-use App\Filament\Pages\PulseDashboard;
-use App\Filament\Widgets\RecentActivityWidget;
-use App\Filament\Widgets\UserStatsWidget;
-use Dotswan\FilamentLaravelPulse\Widgets\PulseCache;
-use Dotswan\FilamentLaravelPulse\Widgets\PulseExceptions;
-use Dotswan\FilamentLaravelPulse\Widgets\PulseQueues;
-use Dotswan\FilamentLaravelPulse\Widgets\PulseServers;
-use Dotswan\FilamentLaravelPulse\Widgets\PulseSlowOutGoingRequests;
-use Dotswan\FilamentLaravelPulse\Widgets\PulseSlowQueries;
-use Dotswan\FilamentLaravelPulse\Widgets\PulseSlowRequests;
-use Dotswan\FilamentLaravelPulse\Widgets\PulseUsage;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\View\PanelsRenderHook;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
@@ -57,7 +45,6 @@ class AdminPanelProvider extends PanelProvider
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
                 Dashboard::class,
-                PulseDashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->middleware([
@@ -66,7 +53,7 @@ class AdminPanelProvider extends PanelProvider
                 StartSession::class,
                 AuthenticateSession::class,
                 ShareErrorsFromSession::class,
-                VerifyCsrfToken::class,
+                PreventRequestForgery::class,
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
