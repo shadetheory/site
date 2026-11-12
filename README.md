@@ -1,7 +1,7 @@
 # Filament Skeleton
 
-[![Latest Version](https://img.shields.io/github/v/release/jordanpartridge/filament-skeleton)](https://github.com/jordanpartridge/filament-skeleton/releases)
-[![License](https://img.shields.io/github/license/jordanpartridge/filament-skeleton)](LICENSE.md)
+[![Latest Version](https://img.shields.io/github/v/release/shadetheory/filament-skeleton)](https://github.com/shadetheory/filament-skeleton/releases)
+[![License](https://img.shields.io/github/license/shadetheory/filament-skeleton)](LICENSE.md)
 
 ## What's included
 
